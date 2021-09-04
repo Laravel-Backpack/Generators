@@ -11,14 +11,14 @@ class ViewBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'backpack:view';
+    protected $name = 'backpack:make:view';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:view {name} {--plain}';
+    protected $signature = 'backpack:make:view {name} {--plain}';
 
     /**
      * The console command description.

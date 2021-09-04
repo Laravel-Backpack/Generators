@@ -12,14 +12,14 @@ class CrudModelBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'backpack:crud-model';
+    protected $name = 'backpack:make:model';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-model {name}';
+    protected $signature = 'backpack:make:crud-model {name}';
 
     /**
      * The console command description.

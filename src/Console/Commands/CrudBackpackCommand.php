@@ -12,7 +12,7 @@ class CrudBackpackCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'backpack:crud {name}';
+    protected $signature = 'backpack:make:crud {name}';
 
     /**
      * The console command description.

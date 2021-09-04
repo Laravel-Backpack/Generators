@@ -12,14 +12,14 @@ class ModelBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'backpack:model';
+    protected $name = 'backpack:make:model';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:model {name} {--softdelete}';
+    protected $signature = 'backpack:make:model {name} {--softdelete}';
 
     /**
      * The console command description.

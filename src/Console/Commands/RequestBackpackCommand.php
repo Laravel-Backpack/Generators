@@ -11,14 +11,14 @@ class RequestBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'backpack:request';
+    protected $name = 'backpack:make:request';
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backpack:request {name}';
+    protected $signature = 'backpack:make:request {name}';
 
     /**
      * The console command description.
