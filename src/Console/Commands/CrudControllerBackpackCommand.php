@@ -147,8 +147,9 @@ class CrudControllerBackpackCommand extends GeneratorCommand
             ->toArray();
 
         // replace setFromDb with actual fields and columns
-        $stub = str_replace('CRUD::setFromDb(); // fields', implode(PHP_EOL.'        ', $fields), $stub);
-        $stub = str_replace('CRUD::setFromDb(); // columns', implode(PHP_EOL.'        ', $columns), $stub);
+        $line = "\n        ";
+        $stub = preg_replace('/(CRUD::setFromDb.+fields)/', "// $1\n".$line.implode($line, $fields), $stub);
+        $stub = preg_replace('/(CRUD::setFromDb.+columns)/', "// $1\n".$line.implode($line, $columns), $stub);
 
         return $this;
     }
