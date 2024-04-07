@@ -16,7 +16,7 @@ class BuildBackpackCommand extends Command
      * @var string
      */
     protected $signature = 'backpack:build
-        {--validation=request : Validation type, must be request, array or field}';
+        {--validation= : Validation type, must be request, array or field}';
 
     /**
      * The console command description.
@@ -32,6 +32,12 @@ class BuildBackpackCommand extends Command
      */
     public function handle()
     {
+        // Validate validation option
+        $validation = $this->handleValidationOption();
+        if (! $validation) {
+            return false;
+        }
+
         // make a list of all models
         $models = $this->getModels(base_path('app'));
 
@@ -42,7 +48,7 @@ class BuildBackpackCommand extends Command
         }
 
         foreach ($models as $model) {
-            $this->call('backpack:crud', ['name' => $model, '--validation' => $this->option('validation')]);
+            $this->call('backpack:crud', ['name' => $model, '--validation' => $validation]);
             $this->line('  <fg=gray>----------</>');
         }
 
@@ -94,6 +100,39 @@ class BuildBackpackCommand extends Command
         }
 
         return $out;
+    }
+
+    /**
+     * Handle validation Option.
+     *
+     * @return string
+     */
+    private function handleValidationOption()
+    {
+        $options = ['request', 'array', 'field'];
+
+        // Validate validation option
+        $validation = $this->option('validation');
+
+        if (! $validation) {
+            $validation = $this->askHint(
+                'How would you like to define your validation rules, for the Create and Update operations?', [
+                    'More info at <fg=blue>https://backpackforlaravel.com/docs/5.x/crud-operation-create#validation</>',
+                    'Valid options are <fg=blue>request</>, <fg=blue>array</> or <fg=blue>field</>',
+                ], $options[0]);
+
+            if (! $this->option('no-interaction')) {
+                $this->deleteLines(5);
+            }
+        }
+
+        if (! in_array($validation, $options)) {
+            $this->errorBlock("The validation must be request, array or field. '$validation' is not valid.");
+
+            return false;
+        }
+
+        return $validation;
     }
 
     private function validateModelClass(string $class): ?string
