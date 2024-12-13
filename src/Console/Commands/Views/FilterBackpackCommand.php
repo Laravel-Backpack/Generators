@@ -2,6 +2,8 @@
 
 namespace Backpack\Generators\Console\Commands\Views;
 
+use Illuminate\Support\Str;
+
 class FilterBackpackCommand extends PublishOrCreateViewBackpackCommand
 {
     /**
@@ -45,4 +47,19 @@ class FilterBackpackCommand extends PublishOrCreateViewBackpackCommand
      * @var string
      */
     protected $stub = 'filter.stub';
+
+    /**
+     * Build the class with the given name.
+     *
+     * @param  string  $name
+     * @return string
+     */
+    protected function buildClass($name)
+    {
+        $name = Str::of($name)->camel()->ucfirst()->value();
+        $stub = $this->files->get($this->getStub());
+        $stub = str_replace('__FILTER_NAME__', $name, $stub);
+
+        return $stub;
+    }
 }
