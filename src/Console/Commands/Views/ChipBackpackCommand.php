@@ -103,6 +103,7 @@ class ChipBackpackCommand extends PublishOrCreateViewBackpackCommand
                 if (view()->exists($viewPath)) {
                     $this->sourceFile = view($viewPath)->getPath();
                     $this->sourceViewNamespace = $viewPath;
+
                     return;
                 }
             }
@@ -111,6 +112,7 @@ class ChipBackpackCommand extends PublishOrCreateViewBackpackCommand
             $vendorChipPath = base_path("vendor/backpack/crud/src/resources/views/crud/chips/{$from}.blade.php");
             if (file_exists($vendorChipPath)) {
                 $this->sourceFile = $vendorChipPath;
+
                 // Don't set sourceViewNamespace so it uses the default path logic
                 return;
             }
@@ -118,11 +120,13 @@ class ChipBackpackCommand extends PublishOrCreateViewBackpackCommand
             // Third, try full or relative file paths (parent behavior)
             if (file_exists($from)) {
                 $this->sourceFile = realpath($from);
+
                 return;
             }
             // remove the first slash to make absolute paths relative in unix systems
             elseif (file_exists(substr($from, 1))) {
                 $this->sourceFile = realpath(substr($from, 1));
+
                 return;
             }
 
