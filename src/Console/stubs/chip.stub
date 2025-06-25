@@ -1,0 +1,29 @@
+@php
+    // ----------------------------------
+    // Create any variables you need here
+    // ----------------------------------
+    // If you're using this chip as a column inside ListOperation, or as a widget inside ShowOperation,
+    // you will most likely have the $entry variable.
+@endphp
+
+@include('crud::chips.general', [
+    'heading' => [
+        'content' => $entry->name,
+        'href' => backpack_url('example/'.$entry->id.'/show'),
+    ],
+    'image' => [
+        'content' => asset($entry->avatar->url),
+    ],
+    'details' => [
+        [
+            'icon' => 'la la-shopping-cart',
+            'content' => $entry->invoices->count(). ' purchases',
+            'title' => 'Number of purchases: '.$entry->invoices->count(),
+        ],
+        [
+            'icon' => 'la la-calendar',
+            'content' => $entry->created_at->format('F j, Y'),
+            'title' => 'Sign up date: '.$last_purchase,
+        ]
+    ]
+])
