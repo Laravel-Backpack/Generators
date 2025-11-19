@@ -18,6 +18,7 @@ use Backpack\Generators\Console\Commands\PageControllerBackpackCommand;
 use Backpack\Generators\Console\Commands\RequestBackpackCommand;
 use Backpack\Generators\Console\Commands\ViewBackpackCommand;
 use Backpack\Generators\Console\Commands\Views\ButtonBackpackCommand;
+use Backpack\Generators\Console\Commands\Views\ChipBackpackCommand;
 use Backpack\Generators\Console\Commands\Views\ColumnBackpackCommand;
 use Backpack\Generators\Console\Commands\Views\FieldBackpackCommand;
 use Backpack\Generators\Console\Commands\Views\FilterBackpackCommand;
@@ -29,6 +30,7 @@ class GeneratorsServiceProvider extends ServiceProvider
     protected $commands = [
         BuildBackpackCommand::class,
         ButtonBackpackCommand::class,
+        ChipBackpackCommand::class,
         ColumnBackpackCommand::class,
         ConfigBackpackCommand::class,
         CrudModelBackpackCommand::class,
