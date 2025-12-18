@@ -57,24 +57,6 @@ php artisan backpack:crud-model {Entity_name}
 php artisan backpack:crud-request {Entity_name}
 ```
 
-- Generate a model (available options: --softdelete)
-
-``` bash
-php artisan backpack:model {Entity_name}
-```
-
-- Generate a request
-
-``` bash
-php artisan backpack:request {Entity_name}
-```
-
-- Generate a view (available options: --plain)
-
-``` bash
-php artisan backpack:view {Entity_name}
-```
-
 - Generate a config file
 
 ``` bash
