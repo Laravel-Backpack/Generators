@@ -18,11 +18,17 @@
 			let filterKey = filter.getAttribute('filter-key');
 			let filterAnchor = filter.querySelector('a');
 			let filterDebounce = filter.getAttribute('filter-debounce');
-			let navBarId = filterNavbar.getAttribute('id');
 			let shouldUpdateUrl = true;
+
+			// prevent duplicate event bindings when the filter view re-renders
+			if (filter.getAttribute('data-filter-initialized') === 'true') {
+				return;
+			}
+			filter.setAttribute('data-filter-initialized', 'true');
 
 			filterAnchor.addEventListener('click', async function(e) {
 				e.preventDefault();
+				shouldUpdateUrl = true;
 
 				// get the filter value
 				let filterValue = filter.classList.contains('active') ? true : false;
@@ -43,20 +49,18 @@
 
 				document.dispatchEvent(new CustomEvent('backpack:filter:changed', {
 					detail: {
-						filterName: filterName, 
-						filterValue: filterValue, 
+						filterName: filterName,
+						filterValue: filterValue,
 						shouldUpdateUrl: shouldUpdateUrl,
 						debounce: filterDebounce,
-
+						componentId: filterNavbar.getAttribute('data-component-id'),
 					}
 				}));
 			});	
 
 			// clear filter event (used here and by the Remove all filters button)
 			filter.addEventListener('backpack:filter:clear', function(e) {
-				if(e.detail && e.detail.clearAllFilters) {
-					shouldUpdateUrl = false
-				}
+				shouldUpdateUrl = !(e.detail && e.detail.clearAllFilters);
 				filter.classList.remove('active');
 			});
 		};			
